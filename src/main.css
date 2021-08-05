@@ -1,0 +1,4 @@
+.log-area{
+    height: 200px;
+    overflow-y: scroll;
+}
