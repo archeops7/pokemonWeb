@@ -16,11 +16,11 @@ export class oppoMove extends moveBase {
     move(self, target){
         let msg = [];
         msg.push(self._name + "　の　" + this._name + "！");
-        if(Math.floor(Math.random() * 101) <= accurate(self._accuracy, target._evasion)){
-            const [effect, typeMsg] = type(self._type, target._type);
+        if(Math.floor(Math.random() * 101) <= this.accurate(self._accuracy, target._evasion)){
+            const [effect, typeMsg] = this.type(self._type, target._type);
             msg.concat(typeMsg);
             if(effect){
-                msg = msg.concat(opponentMove(self, target, effect));
+                msg = msg.concat(this.opponentMove(self, target, effect));
             }
         }else{
             msg.push(target._name + "　には　あたらなかった！");
@@ -29,8 +29,8 @@ export class oppoMove extends moveBase {
     }
 
     opponentMove(self, target, effect){
-        let msg = [];
-        return msg;
+        let dummy = [self, target, effect];
+        console.log(dummy)
     }
 
     accurate(acu, eva){
@@ -55,26 +55,30 @@ export class oppoMove extends moveBase {
         //タイプ相性及びタイプ一致
         let msg = [];
         let factor = 1;
-        for(t in targetType){
+        for(let i = 0; i < targetType.length; i++){
+            let t = targetType[i];
             switch(this._type){
                 case "normal":
                     if(t === "ghost"){
                         factor *= 0;
-                    }else if([["rock", "steel"].includes(t)]){
+                    }else if(["rock", "steel"].includes(t)){
                         factor /= 2;
                     }
+                    break;
                 case "fire":
                     if(["fire", "water", "rock", "dragon"].includes(t)){
                         factor /= 2;
                     }else if(["grass", "ice", "bug", "steel"].includes(t)){
                         factor *= 2;
                     }
+                    break;
                 case "water":
                     if(["water", "grass", "dragon"].includes(t)){
                         factor /= 2;
                     }else if(["fire", "ground", "rock"].includes(t)){
                         factor *= 2;
                     }
+                    break;
                 case "electric":
                     if(t === "ground"){
                         factor *= 0;
@@ -83,18 +87,21 @@ export class oppoMove extends moveBase {
                     }else if(["water", "flying"].includes(t)){
                         factor *= 2;
                     }
+                    break;
                 case "grass":
                     if(["fire", "grass", "poison", "flying", "bug", "dragon", "steel"].includes(t)){
                         factor /= 2;
                     }else if(["water", "ground", "rock"].includes(t)){
                         factor *= 2;
                     }
+                    break;
                 case "ice":
                     if(["fire", "water", "ice", "steel"].includes(t)){
                         factor /= 2;
                     }else if(["grass", "ground", "flying", "dragon"].includes(t)){
                         factor *= 2;
                     }
+                    break;
                 case "psychic":
                     if(t === "dark"){
                         factor *= 0;
@@ -104,6 +111,7 @@ export class oppoMove extends moveBase {
                     }else if(["fighting", "poison"].includes(t)){
                         factor *= 2;
                     }
+                    break;
                 case "fighting":
                     if(t === "ghost"){
                         factor *= 0;
@@ -112,6 +120,7 @@ export class oppoMove extends moveBase {
                     }else if(["normal", "ice", "rock", "dark", "steel"].includes(t)){
                         factor *= 2;
                     }
+                    break;
                 case "poison":
                     if(t === "steel"){
                         factor *= 0;
@@ -120,6 +129,7 @@ export class oppoMove extends moveBase {
                     }else if(["grass", "fairy"].includes(t)){
                         factor *= 2;
                     }
+                    break;
                 case "ground":
                     if(t === "flying"){
                         factor *= 0;
@@ -128,24 +138,28 @@ export class oppoMove extends moveBase {
                     }else if(["fire", "electric", "poison", "rock", "steel"].includes(t)){
                         factor *= 2;
                     }
+                    break;
                 case "flying":
                     if(["electric", "rock", "steel"].includes(t)){
                         factor /= 2;
                     }else if(["grass", "fighting", "bug"].includes(t)){
                         factor *= 2;
                     }
+                    break;
                 case "bug":
                     if(["fire", "fighting", "poison", "flying", "ghost", "steel", "fairy"].includes(t)){
                         factor /= 2;
                     }else if(["grass", "psychic", "dark"].includes(t)){
                         factor *= 2;
                     }
+                    break;
                 case "rock":
                     if(["fighting", "ground", "steel"].includes(t)){
                         factor /= 2;
                     }else if(["fire", "ice", "flying", "bug"].includes(t)){
                         factor *= 2;
                     }
+                    break;
                 case "ghost":
                     if(t === "normal"){
                         factor *= 0;
@@ -155,6 +169,7 @@ export class oppoMove extends moveBase {
                     }else if(["psychic", "ghost"].includes(t)){
                         factor *= 2;
                     }
+                    break;
                 case "dragon":
                     if(t === "fairy"){
                         factor *= 0;
@@ -164,18 +179,21 @@ export class oppoMove extends moveBase {
                     }else if(["dragon"].includes(t)){
                         factor *= 2;
                     }
+                    break;
                 case "dark":
                     if(["fighting", "dark", "fairy"].includes(t)){
                         factor /= 2;
                     }else if(["psychic", "ghost"].includes(t)){
                         factor *= 2;
                     }
+                    break;
                 case "steel":
                     if(["fire", "water", "electric", "steel"].includes(t)){
                         factor /= 2;
                     }else if(["ice", "rock", "fairy"].includes(t)){
                         factor *= 2;
                     }
+                    break;
                 case "fairy":
                     if(["fire", "poison", "steel"].includes(t)){
                         factor /= 2;

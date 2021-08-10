@@ -1,0 +1,12 @@
+[{"no":,"name":"","type":,"pp":,"power":,"moveType":"","accuracy":100,"contact":true,"additional":0,"addProb":0,"priority":0,"critical":0},
+{"no":,"name":"","type":,"pp":,"power":,"moveType":"","accuracy":100,"contact":true,"additional":0,"addProb":0,"priority":0,"critical":0},
+{"no":,"name":"","type":,"pp":,"power":,"moveType":"","accuracy":100,"contact":true,"additional":0,"addProb":0,"priority":0,"critical":0},
+{"no":,"name":"","type":,"pp":,"power":,"moveType":"","accuracy":100,"contact":true,"additional":0,"addProb":0,"priority":0,"critical":0},
+{"no":,"name":"","type":,"pp":,"power":,"moveType":"","accuracy":100,"contact":true,"additional":0,"addProb":0,"priority":0,"critical":0},
+{"no":,"name":"","type":,"pp":,"power":,"moveType":"","accuracy":100,"contact":true,"additional":0,"addProb":0,"priority":0,"critical":0},
+{"no":,"name":"","type":,"pp":,"power":,"moveType":"","accuracy":100,"contact":true,"additional":0,"addProb":0,"priority":0,"critical":0},
+{"no":,"name":"","type":,"pp":,"power":,"moveType":"","accuracy":100,"contact":true,"additional":0,"addProb":0,"priority":0,"critical":0},
+{"no":,"name":"","type":,"pp":,"power":,"moveType":"","accuracy":100,"contact":true,"additional":0,"addProb":0,"priority":0,"critical":0},
+{"no":,"name":"","type":,"pp":,"power":,"moveType":"","accuracy":100,"contact":true,"additional":0,"addProb":0,"priority":0,"critical":0},
+{"no":,"name":"","type":,"pp":,"power":,"moveType":"","accuracy":100,"contact":true,"additional":0,"addProb":0,"priority":0,"critical":0},
+{"no":,"name":"","type":,"pp":,"power":,"moveType":"","accuracy":100,"contact":true,"additional":0,"addProb":0,"priority":0,"critical":0},]

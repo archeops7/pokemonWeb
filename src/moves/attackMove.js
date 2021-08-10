@@ -29,7 +29,7 @@ export class attackMove extends oppoMove{
     set critical(value) {
         this._critical = value;
     }
-    constructor(no, name, type, pp, accuracy = 100, power, moveType, contact = true,  additional = 0, addProb = 0, priority = 0, critical = 0){
+    constructor(no, name, type, pp, power, moveType, accuracy = 100, contact = true,  additional = 0, addProb = 0, priority = 0, critical = 0){
         super(no, name, type, pp, accuracy, additional, addProb, priority);
         this._power = power;
         this._moveType = moveType;
@@ -47,12 +47,12 @@ export class attackMove extends oppoMove{
             b = target._d * this.rank(target._dRank);
         }
 
-        let cri = critical();
+        let cri = this.calcCritical(self);
         if(cri === 1.5){
             msg.push("きゅうしょに　あたった！");
         }
 
-        let damage = Math.floor(Math.floor(Math.floor(Math.floor(self._level * 2 / 5 + 2) * this._power * a / b) / 50 + 2) * randomD() * cri * effect);
+        let damage = Math.floor(Math.floor(Math.floor(Math.floor(self._level * 2 / 5 + 2) * this._power * a / b) / 50 + 2) * this.randomD() * cri * effect);
 
         if(damage < 1){
             damage = 1;
@@ -65,7 +65,7 @@ export class attackMove extends oppoMove{
         return msg;
     }
 
-    critical(self){
+    calcCritical(self){
         let cri = 1;
         if(this._critical + self.criticalRate >= 3){
             if(Math.floor(Math.random() * 101) < (1/ 1)){

@@ -61,11 +61,11 @@ export class moveBases{
     move(self){
         let msg = [];
         msg.push(self._name + "　の　" + this._name + "！");
-        msg.concat(originMove(self));
+        msg.concat(this.originMove(self));
         return msg;
     }
 
-    originMove(self){
+    originMove(){
         let msg = [];
         return msg;
     }

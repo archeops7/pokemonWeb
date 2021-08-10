@@ -1,4 +1,4 @@
-export class PokemonBase{
+export default class PokemonBase{
     _no;
     get no() {
         return this._no;
@@ -231,7 +231,7 @@ export class PokemonBase{
         this._ailment = value;
     }
     constructor(no, name, level, nature, type ,bases, efbases, moves, IVs){
-        thiss._no = no;
+        this._no = no;
         this._name = name;
         this._level = level;
         this._type = type;

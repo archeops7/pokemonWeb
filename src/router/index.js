@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../components/Home.vue'
+import PartyEdit from '../components/PartyEdit.vue'
+import PartySelect from '../components/PartySelect.vue'
+import PartyDetail from '../components/PartyDetail.vue'
+import Battle from '../components/Battle.vue'
 
 Vue.use(VueRouter)
 
@@ -11,12 +15,36 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/partyEdit',
+    name: 'PartyEdit',
+    component: PartyEdit,
+    children:[
+      {
+        path: '/select/:index',
+        name: 'select',
+        component: PartySelect,
+        props: routes => ({
+          index: Number(routes.params.index)
+        })
+      },
+      {
+        path: '/detail/:index',
+        name: 'detail',
+        component: PartyDetail,
+        props: routes => ({
+          index: Number(routes.params.index)
+        })
+      },
+    ]
+  },
+  {
+    path: '/battle',
+    name: 'Battle',
+    component: Battle
+  },
+  {
+    path: '*',
+    redirect: '/'
   }
 ]
 
