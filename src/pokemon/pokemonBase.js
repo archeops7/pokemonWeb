@@ -231,13 +231,15 @@ export default class PokemonBase{
         this._ailment = value;
     }
     constructor(no, name, level, nature, type ,bases, efbases, moves, IVs){
-        this._no = no;
+        this._no = Number(no);
         this._name = name;
-        this._level = level;
+        this._level = Number(level);
         this._type = type;
         this._moves = moves;
         this.setValue(nature, bases, efbases, IVs);
         this._nowHp = this._hp;
+        this._ailment = ['', false, false, [''], [0,0,0], false];//状態 引数:0.状態異常 1.こんらん 2.ひるみ 3.バインド(複数) 4.経過ターン(0.状態異常 1.こんらん 2以降バインド) 5.反動行動不能
+        this._aRank=this._bRank=this._cRank=this._dRank=this._sRank=this._accuracy=this._evasion=this._criticalRate=0;
     }
 
     doMove(select, target){
@@ -246,15 +248,12 @@ export default class PokemonBase{
 
     setValue(nature, bases, efbases, IVs){
         const correction = this.switchCor(nature);
-        if(!(IVs)){
-            IVs = [null, null, null, null, null, null];
-        }
-        this._hp = Math.floor((bases[0] + this.makeRandom(IVs[0]) / 2 + efbases[0] / 8) + 60);
-        this._a = Math.floor(((bases[1] + this.makeRandom(IVs[1]) / 2 + efbases[1] / 8) + 5) * correction[0]);
-        this._b = Math.floor(((bases[2] + this.makeRandom(IVs[2]) / 2 + efbases[2] / 8) + 5) * correction[1]);
-        this._c = Math.floor(((bases[3] + this.makeRandom(IVs[3]) / 2 + efbases[3] / 8) + 5) * correction[2]);
-        this._d = Math.floor(((bases[4] + this.makeRandom(IVs[4]) / 2 + efbases[4] / 8) + 5) * correction[3]);
-        this._s = Math.floor(((bases[5] + this.makeRandom(IVs[5]) / 2 + efbases[5] / 8) + 5) * correction[4]);
+        this._hp = Math.floor((Number(bases[0]) + this.makeRandom(Number(IVs[0])) / 2 + Number(efbases[0]) / 8) + 60);
+        this._a = Math.floor(((Number(bases[1]) + this.makeRandom(Number(IVs[1])) / 2 + Number(efbases[1]) / 8) + 5) * correction[0]);
+        this._b = Math.floor(((Number(bases[2]) + this.makeRandom(Number(IVs[2])) / 2 + Number(efbases[2]) / 8) + 5) * correction[1]);
+        this._c = Math.floor(((Number(bases[3]) + this.makeRandom(Number(IVs[3])) / 2 + Number(efbases[3]) / 8) + 5) * correction[2]);
+        this._d = Math.floor(((Number(bases[4]) + this.makeRandom(Number(IVs[4])) / 2 + Number(efbases[4]) / 8) + 5) * correction[3]);
+        this._s = Math.floor(((Number(bases[5]) + this.makeRandom(Number(IVs[5])) / 2 + Number(efbases[5]) / 8) + 5) * correction[4]);
     }
     makeRandom(num){
         if(num){

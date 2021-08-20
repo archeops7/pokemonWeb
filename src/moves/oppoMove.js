@@ -1,6 +1,6 @@
-import { moveBase } from "./moveBase";
+import  moveBase  from "./moveBase";
 
-export class oppoMove extends moveBase {
+export default class oppoMove extends moveBase {
     _accuracy;
     get accuracy() {
         return this._accuracy;
@@ -13,14 +13,14 @@ export class oppoMove extends moveBase {
         this._accuracy = accuracy;
     }
 
-    move(self, target){
+    move(player, target){
         let msg = [];
-        msg.push(self._name + "　の　" + this._name + "！");
-        if(Math.floor(Math.random() * 101) <= this.accurate(self._accuracy, target._evasion)){
-            const [effect, typeMsg] = this.type(self._type, target._type);
+        msg.push(player._name + "　の　" + this._name + "！");
+        if(Math.floor(Math.random() * 101) <= this.accurate(player._accuracy, target._evasion)){
+            const [effect, typeMsg] = this.typeEf(player._type, target._type);
             msg.concat(typeMsg);
             if(effect){
-                msg = msg.concat(this.opponentMove(self, target, effect));
+                msg = msg.concat(this.opponentMove(player, target, effect));
             }
         }else{
             msg.push(target._name + "　には　あたらなかった！");
@@ -28,8 +28,8 @@ export class oppoMove extends moveBase {
         return msg;
     }
 
-    opponentMove(self, target, effect){
-        let dummy = [self, target, effect];
+    opponentMove(player, target, effect){
+        let dummy = [player, target, effect];
         console.log(dummy)
     }
 
@@ -51,7 +51,7 @@ export class oppoMove extends moveBase {
         return this.accuracy * rate;
     }
 
-    type(selfType, targetType){
+    typeEf(selfType, targetType){
         //タイプ相性及びタイプ一致
         let msg = [];
         let factor = 1;

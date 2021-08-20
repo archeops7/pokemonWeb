@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import cps from 'vuex-persistedstate'
 import pokemonBase from '../pokemon/pokemonBase'
+import atkMove from '../moves/atkbase'
 import pokemonList from '../datajsons/pokemonList.json'
 import moveList from '../datajsons/moveList.json'
 
@@ -61,7 +62,12 @@ export default new Vuex.Store({
         p.name = pData.name
         p.type = [pData.type1, pData.type2]
         p.bases = [pData.h, pData.a, pData.b, pData.c, pData.d, pData.s]
-        party.push(new pokemonBase(p.no, p.name, p.level, p.nature, p.type, p.bases, p.efbases, p.moves, p.IVs));
+        let ms = []
+        p.moves.forEach(m =>{
+          let md = this.getters.getMList[Number(m) - 1]
+          ms.push(new atkMove(md.no,md.name,md.type,Number(md.pp),Number(md.power),md.moveType,Number(md.accuracy),md.contact,Number(md.additional),Number(md.addProb),Number(md.priority),Number(md.critical)))
+        })
+        party.push(new pokemonBase(p.no, p.name, p.level, p.nature, p.type, p.bases, p.efbases, ms, p.IVs));
       }
         state.pParty = party.concat();
     },
@@ -73,7 +79,13 @@ export default new Vuex.Store({
         p.name = pData.name
         p.type = [pData.type1, pData.type2]
         p.bases = [pData.h, pData.a, pData.b, pData.c, pData.d, pData.s]
-        party.push(new pokemonBase(p.no, p.name, p.level, p.nature, p.type, p.bases, p.efbases, p.moves, p.IVs));
+        let ms = []
+        p.moves.forEach(m =>{
+          let md = this.getters.getMList[Number(m) - 1]
+          console.log(md);
+          ms.push(new atkMove(md.no,md.name,md.type,Number(md.pp),Number(md.power),md.moveType,Number(md.accuracy),md.contact,Number(md.additional),Number(md.addProb),Number(md.priority),Number(md.critical)))
+        })
+        party.push(new pokemonBase(p.no, p.name, p.level, p.nature, p.type, p.bases, p.efbases, ms, p.IVs));
       }
         state.eParty = party.concat();
     },

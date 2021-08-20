@@ -1,4 +1,4 @@
-export class moveBases{
+export default class moveBase{
     _no;
     get no() {
         return this._no;
@@ -83,6 +83,19 @@ export class moveBases{
     7,こんらん
     8,ひるみ
     9,のろい
+    10,はんどう
+    11,a↓
+    12,b↓
+    13,c↓
+    14,d↓
+    15,s↓
+    16,a↑
+    17,b↑
+    18,c↑
+    19,d↑
+    20,s↑
+    21,c↓↓
+    22,meityu↓
     */
 
 

@@ -31,22 +31,19 @@
                 flat
 
                 >
-                <partyShow :party=party></partyShow>
+                <partyShow :party=party :partyBase=partyBase></partyShow>
                 </v-card>
             </v-tab-item>
             </v-tabs-items>
         </v-card>
-        <br>
         <v-card>
-            <router-view class="ma-1" @selected="setSelectedP" :selectedP="this.selectedP"/>
+            <router-view class="ma-1" @addP="addP" @selected="setSelectedP" :selectedP="this.selectedP"/>
         </v-card>
     <!--
         子要素
         １．自分または相手の選択 現在のパーティベースを表示
         ２．ポケモンの選択 名前のリスト表示
         ３．ポケモン詳細（努力値やわざなど）→２に戻る
-
-
     -->
     </v-container>
 </template>
@@ -78,19 +75,34 @@ export default ({
         },
         setSelectedP(value){
             this.selectedP = value;
+        },
+        addP(value){
+            this.party[value.index] = value.pcomp;
+            this.partyBase[value.index] = value.pb;
+            if(this.tab == 0){
+                this.$store.dispatch('updatePartyBase', this.partyBase);
+                this.$store.dispatch('updatePP', this.party);
+            }else{
+                this.$store.dispatch('updateEPartyBase', this.partyBase);
+                this.$store.dispatch('updateEP', this.party);
+            }
+            this.$router.push('/partyEdit')
         }
     },
     mounted(){
         this.pokemonList = this.$store.getters.getPList;
         this.moveList = this.$store.getters.getMList;
-        this.party = this.$store.getters.getPParty;
+        this.party = this.$store.getters.getPParty.slice();
+        this.partyBase = this.$store.getters.getPartyBase.slice();
     },
     watch:{
         tab(newTab){
             if(newTab == 0){
-                this.party = this.$store.getters.getPParty;
+                this.party = this.$store.getters.getPParty.slice();
+                this.partyBase = this.$store.getters.getPartyBase.slice();
             }else{
-                this.party = this.$store.getters.getEParty;
+                this.party = this.$store.getters.getEParty.slice();
+                this.partyBase = this.$store.getters.getEPartyBase.slice();
             }
         }
     }
