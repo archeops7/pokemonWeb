@@ -174,6 +174,14 @@ export default ({
     },
     methods:{
         bcMake(){
+            this.pname = '';
+            this.ename = '';
+            this.php = 0;
+            this.ehp = 0;
+            this.plv = null;
+            this.elv = null;
+            this.pNowHp = null;
+            this.pMaxHp = null;
             this.$store.dispatch('setPFromJ');
             this.$store.dispatch('setEFromJ');
             this.pp = this.$store.getters.getPParty.slice()
@@ -252,7 +260,9 @@ export default ({
                 this.bco.pList[this.altP]._moves.forEach((m,i) =>{
                     this.moves.push(m._name)
                     if(m._pp == 0){
-                        this.canSelectM[i] = true
+                        this.canSelectM[i] = true;
+                    }else{
+                        this.canSelectM[i] = false;
                     }
                 })
                 this.bc.change(this.bco);
