@@ -17,6 +17,7 @@
                     v-bind="attrs"
                     v-on="on"
                     :to='link(i)'
+                    @click="selected(i)"
                     >
                         {{p._name}}
                     </v-btn>
@@ -73,6 +74,18 @@
                 </div>
             </v-tooltip>
         </v-col>
+        <v-col cols="1" justify="end">
+            <v-btn x-small dark color="orange darken-1" :disabled="disPlus" :to="addLink">
+                <v-icon dark x-small>
+                    mdi-plus
+                </v-icon>
+            </v-btn>
+            <v-btn x-small dark color="blue lighten-4" :disabled="disDelete" @click="deleteP">
+                <v-icon dark x-small>
+                    mdi-cancel
+                </v-icon>
+            </v-btn>
+        </v-col>
         </v-row>
     </div>
     <!--
@@ -92,7 +105,11 @@ export default ({
     },
     data() {
         return{
-            items:[]
+            items:[],
+            disPlus:null,
+            disDelete:null,
+            selector:null,
+            addLink:'',
         }
     },
     methods:{
@@ -109,14 +126,39 @@ export default ({
         },
         link(i){
             return '/select/' + i
+        },
+        selected(i){
+            this.selector = i;
+        },
+        deleteP(){
+            this.$emit('deleteP', {index:this.selector});
         }
     },
     mounted(){
         this.setItems();
+        if(this.party.length < 6){
+            this.disPlus = false;
+            this.addLink = '/select/' + this.party.length
+        }else{
+            this.disPlus = true;
+        }
+        this.disDelete = true;
     },
     watch:{
         party(){
             this.setItems();
+            if(this.party.length < 6){
+                this.disPlus = false;
+                this.addLink = '/select/' + this.party.length
+            }else{
+                this.disPlus = true;
+            }
+        },
+        selector(){
+            if(this.selector){
+                this.disDelete = false;
+                console.log(this.selector)
+            }
         }
     }
 })

@@ -88,6 +88,7 @@
                 >
                     {{move}}
                 </v-btn>
+                <br>
                 <v-btn
                 class="ma-2"
                 :disabled="dischange"
@@ -187,7 +188,6 @@ export default ({
             this.pp = this.$store.getters.getPParty.slice()
             this.ep = this.$store.getters.getEParty.slice()
             this.bc = new battleControl()
-            console.log(this.bc)
             this.bco = this.bc.makeBattle(this.pp, this.ep)
             console.log(this.bco)
             this.addmsg();
@@ -267,7 +267,6 @@ export default ({
                 })
                 this.bc.change(this.bco);
                 this.bcswitch();
-                console.log(this.bco.pList[this.bco.pNow]._nowHp +":" + this.bco.pList[this.bco.pNow]._hp)
                 this.pNowHp = this.bco.pList[this.bco.pNow]._nowHp
                 this.pMaxHp = this.bco.pList[this.bco.pNow]._hp
                 this.php = this.bco.pList[this.bco.pNow]._nowHp / this.bco.pList[this.bco.pNow]._hp * 100;
@@ -384,7 +383,7 @@ export default ({
             //メッセージバッファから先頭1文字を削除
             this.msgBuff = this.msgBuff.slice(1);
             //
-            setTimeout(this.messageChar, 100);
+            setTimeout(this.messageChar, 80);
         },
         sleep(waitSec, callbackFunc) {
             var spanedSec = 0;

@@ -31,7 +31,7 @@
                 flat
 
                 >
-                <partyShow :party=party :partyBase=partyBase></partyShow>
+                <partyShow :party=party :partyBase=partyBase @deleteP="deleteP"></partyShow>
                 </v-card>
             </v-tab-item>
             </v-tabs-items>
@@ -79,6 +79,19 @@ export default ({
         addP(value){
             this.party[value.index] = value.pcomp;
             this.partyBase[value.index] = value.pb;
+            if(this.tab == 0){
+                this.$store.dispatch('updatePartyBase', this.partyBase);
+                this.$store.dispatch('updatePP', this.party);
+            }else{
+                this.$store.dispatch('updateEPartyBase', this.partyBase);
+                this.$store.dispatch('updateEP', this.party);
+            }
+            this.$router.push('/partyEdit')
+        },
+        deleteP(i){
+            this.party.splice(i.index, 1);
+            this.partyBase.splice(i.index, 1);
+            console.log("deletedo:" + this.party )
             if(this.tab == 0){
                 this.$store.dispatch('updatePartyBase', this.partyBase);
                 this.$store.dispatch('updatePP', this.party);

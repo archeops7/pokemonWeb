@@ -40,7 +40,6 @@ export default class BattleControl{
         console.log("mainbcstart")
         let p = bco.pSelect
         let e = bco.eSelect
-        console.log(p + ":" + e)
         if(p > e && p > 4){
             bco = this.switchBC([bco, p])
             bco = this.switchBC([bco, e])
@@ -76,7 +75,6 @@ export default class BattleControl{
 
     switchBC(ary){
         console.log("switchbcstart")
-        console.log(ary)
         //交代6道具5dumわざ4わざ0~3
         if(ary.length===3 && ary[0].pSelect < 4){
             this.doBattle(ary[0])
@@ -111,7 +109,6 @@ export default class BattleControl{
         let edo = (bco.eSelect < 4);
         let msg = [];
         let cando = true;
-        console.log(pdo + ":" + edo)
         if(pdo && edo){
             if(bco.epList[bco.eNow]._moves[bco.eSelect]._priority > bco.pList[bco.pNow]._moves[bco.pSelect]._priority){
                 preP = false;
@@ -166,7 +163,6 @@ export default class BattleControl{
 
     change(bco){
         console.log("changestart")
-        console.log(bco)
         if(bco.pSelect === 6){
             this.resetRank(bco.pList[bco.pNow])
             bco.pNow = bco.pEtc

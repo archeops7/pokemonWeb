@@ -102,14 +102,12 @@ export default class atkbase{
         console.log("movingstart")
         let msg = [];
         msg.push(player._name + "　の　" + this._name + "！");
-        console.log(this.accurate(player._accuracy, target._evasion))
         if(target._nowHp === 0){
             msg.push("しかし　うまくきまらなかった")
         }else{
             if(Math.floor(Math.random() * 101) <= this.accurate(player._accuracy, target._evasion)){
                 const [effect, typeMsg] = this.typeEf(player._type, target._type);
                 msg = msg.concat(typeMsg);
-                console.log("ef:" + effect + "typemsg:" + typeMsg)
                 if(effect){
                     msg = msg.concat(this.opponentMove(player, target, effect));
                 }
@@ -135,11 +133,7 @@ export default class atkbase{
         if(cri === 1.5){
             msg.push("きゅうしょに　あたった！");
         }
-        console.log(this._power)
-        console.log(a +':'+ b)
-        console.log(Math.floor(player._level * 2 / 5 + 2) + ':' + (Math.floor(Math.floor(player._level * 2 / 5 + 2) * this._power * a / b)) + ':' + Math.floor(Math.floor(Math.floor(Math.floor(player._level * 2 / 5 + 2) * this._power * a / b) / 50 + 2) * this.randomD() * cri * effect))
         let damage = Math.floor(Math.floor(Math.floor(Math.floor(player._level * 2 / 5 + 2) * this._power * a / b) / 50 + 2) * this.randomD() * cri * effect);
-        console.log(damage)
         if(player._ailment[0] === 'やけど' && this._moveType === "Physics"){
             damage = Math.floor(damage * 0.5);
         }
@@ -160,7 +154,6 @@ export default class atkbase{
             msg = msg.concat(this.addCheck(player, target))
         }
         if(this._additional == 9){
-            console.log("9")
             msg = msg.concat(this.addCheck(player, target))
         }
         target._nowHp -= damage;
@@ -283,11 +276,9 @@ export default class atkbase{
                     }
                     break;
                 case 8://ひるみ
-                    console.log("hirumi")
                     target._ailment[2] = true
                     break;
                 case 9://はんどう（行動不能）
-                    console.log("handou")
                     player._ailment[5] = true
                     break;
                 case 10://はんどう（ダメージ、別メソッド）
